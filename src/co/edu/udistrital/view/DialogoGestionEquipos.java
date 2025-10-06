@@ -14,8 +14,8 @@ import java.util.List;
  * Diálogo para la gestión de equipos y jugadores.
  * Implementa el patrón MVC al delegar toda la lógica al controlador.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
 public class DialogoGestionEquipos extends JDialog {
     

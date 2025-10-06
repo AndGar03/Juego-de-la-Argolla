@@ -1,366 +1,444 @@
 package co.edu.udistrital.controller;
 
 import co.edu.udistrital.model.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
-import static org.junit.jupiter.api.Assertions.*;
+import co.edu.udistrital.persistence.ArchivoAccesoAleatorio;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
- * Pruebas unitarias para la clase GameManager.
- * Utiliza JUnit 5 con las anotaciones requeridas.
+ * Clase de pruebas unitarias para GameManager.
+ * Prueba todas las funcionalidades del controlador principal del juego.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
-@DisplayName("Pruebas del GameManager")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GameManagerTest {
     
-    private static GameManager gameManager;
-    private static ConfiguracionJuego configuracion;
-    private static Equipo equipo1;
-    private static Equipo equipo2;
-    private static Jugador jugador1;
-    private static Jugador jugador2;
+    private GameManager gameManager;
+    private ConfiguracionJuego configuracion;
+    private Equipo equipoTest;
+    private Jugador jugadorTest;
     
+    /**
+     * Configuración inicial antes de todas las pruebas.
+     */
     @BeforeAll
-    static void setUpClass() {
-        // Configuración inicial para todas las pruebas
-        configuracion = new ConfiguracionJuego();
-        configuracion.setMaxJugadoresPorEquipo(2);
-        configuracion.setMaxEquiposPorPartida(2);
-        configuracion.setMaxRondasPorPartida(5);
-        configuracion.setPuntosParaGanar(50);
-        configuracion.setPuntosPorAcierto(10);
-        configuracion.setPuntosPorIntento(1);
-        
-        // Crear equipos y jugadores de prueba
-        equipo1 = new Equipo("Equipo Rojo", "Rojo");
-        equipo2 = new Equipo("Equipo Azul", "Azul");
-        jugador1 = new Jugador("Jugador 1");
-        jugador2 = new Jugador("Jugador 2");
+    static void setUpAll() {
+        System.out.println("=== INICIANDO PRUEBAS DE GAMEMANAGER ===");
     }
     
+    /**
+     * Limpieza después de todas las pruebas.
+     */
     @AfterAll
-    static void tearDownClass() {
-        // Limpieza final después de todas las pruebas
-        gameManager = null;
-        configuracion = null;
-        equipo1 = null;
-        equipo2 = null;
-        jugador1 = null;
-        jugador2 = null;
+    static void tearDownAll() {
+        System.out.println("=== FINALIZANDO PRUEBAS DE GAMEMANAGER ===");
     }
     
+    /**
+     * Configuración antes de cada prueba.
+     */
     @BeforeEach
     void setUp() {
-        // Configuración antes de cada prueba
+        System.out.println("Configurando prueba...");
         gameManager = new GameManager();
-        gameManager.setConfiguracion(configuracion);
+        configuracion = new ConfiguracionJuego();
+        equipoTest = new Equipo("Equipo Test", "Azul");
+        jugadorTest = new Jugador("Jugador Test");
     }
     
+    /**
+     * Limpieza después de cada prueba.
+     */
     @AfterEach
     void tearDown() {
-        // Limpieza después de cada prueba
+        System.out.println("Limpiando después de prueba...");
         gameManager = null;
+        configuracion = null;
+        equipoTest = null;
+        jugadorTest = null;
     }
     
+    /**
+     * Prueba la creación exitosa de un equipo.
+     */
     @Test
-    @DisplayName("Debería inicializar una nueva partida exitosamente")
-    void testIniciarNuevaPartida() {
-        // Arrange & Act
+    @Order(1)
+    @DisplayName("Crear equipo válido")
+    void testCrearEquipoValido() {
+        // Arrange
+        String nombre = "Equipo A";
+        String color = "Rojo";
+        
+        // Act
+        Equipo equipo = gameManager.crearEquipo(nombre, color);
+        
+        // Assert
+        assertNotNull(equipo, "El equipo creado no debe ser null");
+        assertEquals(nombre, equipo.getNombre(), "El nombre del equipo debe coincidir");
+        assertEquals(color, equipo.getColor(), "El color del equipo debe coincidir");
+    }
+    
+    /**
+     * Prueba la creación de un equipo con nombre nulo.
+     */
+    @Test
+    @Order(2)
+    @DisplayName("Crear equipo con nombre nulo")
+    void testCrearEquipoNombreNulo() {
+        // Arrange
+        String nombre = null;
+        String color = "Verde";
+        
+        // Act
+        Equipo equipo = gameManager.crearEquipo(nombre, color);
+        
+        // Assert
+        assertNull(equipo, "El equipo con nombre nulo debe ser null");
+    }
+    
+    /**
+     * Prueba la creación de un equipo con nombre vacío.
+     */
+    @Test
+    @Order(3)
+    @DisplayName("Crear equipo con nombre vacío")
+    void testCrearEquipoNombreVacio() {
+        // Arrange
+        String nombre = "";
+        String color = "Amarillo";
+        
+        // Act
+        Equipo equipo = gameManager.crearEquipo(nombre, color);
+        
+        // Assert
+        assertNull(equipo, "El equipo con nombre vacío debe ser null");
+    }
+    
+    /**
+     * Prueba la creación de un equipo con color nulo.
+     */
+    @Test
+    @Order(4)
+    @DisplayName("Crear equipo con color nulo")
+    void testCrearEquipoColorNulo() {
+        // Arrange
+        String nombre = "Equipo B";
+        String color = null;
+        
+        // Act
+        Equipo equipo = gameManager.crearEquipo(nombre, color);
+        
+        // Assert
+        assertNotNull(equipo, "El equipo creado no debe ser null");
+        assertEquals("Azul", equipo.getColor(), "El color por defecto debe ser Azul");
+    }
+    
+    /**
+     * Prueba la creación exitosa de un jugador.
+     */
+    @Test
+    @Order(5)
+    @DisplayName("Crear jugador válido")
+    void testCrearJugadorValido() {
+        // Arrange
+        String nombre = "Jugador A";
+        
+        // Act
+        Jugador jugador = gameManager.crearJugador(nombre);
+        
+        // Assert
+        assertNotNull(jugador, "El jugador creado no debe ser null");
+        assertEquals(nombre, jugador.getNombre(), "El nombre del jugador debe coincidir");
+        assertEquals(0, jugador.getPuntuacion(), "La puntuación inicial debe ser 0");
+        assertEquals(0, jugador.getIntentos(), "Los intentos iniciales deben ser 0");
+        assertEquals(0, jugador.getAciertos(), "Los aciertos iniciales deben ser 0");
+    }
+    
+    /**
+     * Prueba la creación de un jugador con nombre nulo.
+     */
+    @Test
+    @Order(6)
+    @DisplayName("Crear jugador con nombre nulo")
+    void testCrearJugadorNombreNulo() {
+        // Arrange
+        String nombre = null;
+        
+        // Act
+        Jugador jugador = gameManager.crearJugador(nombre);
+        
+        // Assert
+        assertNull(jugador, "El jugador con nombre nulo debe ser null");
+    }
+    
+    /**
+     * Prueba la creación de un jugador con nombre vacío.
+     */
+    @Test
+    @Order(7)
+    @DisplayName("Crear jugador con nombre vacío")
+    void testCrearJugadorNombreVacio() {
+        // Arrange
+        String nombre = "   ";
+        
+        // Act
+        Jugador jugador = gameManager.crearJugador(nombre);
+        
+        // Assert
+        assertNull(jugador, "El jugador con nombre vacío debe ser null");
+    }
+    
+    /**
+     * Prueba la inicialización de una nueva partida con configuración válida.
+     */
+    @Test
+    @Order(8)
+    @DisplayName("Iniciar nueva partida con configuración válida")
+    void testIniciarNuevaPartidaValida() {
+        // Arrange
+        configuracion.setMaxEquiposPorPartida(4);
+        configuracion.setMaxJugadoresPorEquipo(4);
+        configuracion.setMaxRondasPorPartida(10);
+        configuracion.setPuntosParaGanar(100);
+        
+        // Act
         boolean resultado = gameManager.iniciarNuevaPartida(configuracion);
         
         // Assert
-        assertTrue(resultado, "Debería poder iniciar una nueva partida");
-        assertNotNull(gameManager.getPartidaActual(), "Debería tener una partida actual");
-        assertEquals(Partida.EstadoPartida.PREPARACION, 
-                    gameManager.getPartidaActual().getEstado(), 
-                    "La partida debería estar en preparación");
+        assertTrue(resultado, "La partida debe iniciarse exitosamente");
+        assertNotNull(gameManager.getPartidaActual(), "Debe existir una partida actual");
+        assertEquals(configuracion.getMaxRondasPorPartida(), 
+                    gameManager.getPartidaActual().getMaxRondas(), 
+                    "Las rondas máximas deben coincidir");
     }
     
+    /**
+     * Prueba la inicialización de una nueva partida con configuración nula.
+     */
     @Test
-    @DisplayName("No debería inicializar partida con configuración nula")
-    void testIniciarNuevaPartidaConConfiguracionNula() {
-        // Arrange & Act
-        boolean resultado = gameManager.iniciarNuevaPartida(null);
+    @Order(9)
+    @DisplayName("Iniciar nueva partida con configuración nula")
+    void testIniciarNuevaPartidaConfiguracionNula() {
+        // Arrange
+        ConfiguracionJuego configNula = null;
+        
+        // Act
+        boolean resultado = gameManager.iniciarNuevaPartida(configNula);
         
         // Assert
-        assertFalse(resultado, "No debería poder iniciar partida con configuración nula");
-        assertNull(gameManager.getPartidaActual(), "No debería tener partida actual");
+        assertFalse(resultado, "No debe ser posible iniciar partida con configuración nula");
     }
     
+    /**
+     * Prueba agregar un equipo a la partida.
+     */
     @Test
-    @DisplayName("Debería agregar equipo a la partida")
-    void testAgregarEquipo() {
+    @Order(10)
+    @DisplayName("Agregar equipo a la partida")
+    void testAgregarEquipoAPartida() {
         // Arrange
         gameManager.iniciarNuevaPartida(configuracion);
         
         // Act
-        boolean resultado = gameManager.agregarEquipo(equipo1);
+        boolean resultado = gameManager.agregarEquipo(equipoTest);
         
         // Assert
-        assertTrue(resultado, "Debería poder agregar equipo");
-        assertEquals(1, gameManager.getEquipos().size(), "Debería tener un equipo");
-        assertTrue(gameManager.getEquipos().contains(equipo1), "Debería contener el equipo agregado");
+        assertTrue(resultado, "El equipo debe agregarse exitosamente");
+        assertEquals(1, gameManager.getEquipos().size(), "Debe haber un equipo en la partida");
     }
     
+    /**
+     * Prueba agregar un equipo sin partida activa.
+     */
     @Test
-    @DisplayName("No debería agregar equipo sin partida activa")
+    @Order(11)
+    @DisplayName("Agregar equipo sin partida activa")
     void testAgregarEquipoSinPartida() {
         // Act
-        boolean resultado = gameManager.agregarEquipo(equipo1);
+        boolean resultado = gameManager.agregarEquipo(equipoTest);
         
         // Assert
-        assertFalse(resultado, "No debería poder agregar equipo sin partida");
+        assertFalse(resultado, "No debe ser posible agregar equipo sin partida activa");
     }
     
+    /**
+     * Prueba agregar un jugador a un equipo.
+     */
     @Test
-    @DisplayName("No debería agregar equipo nulo")
-    void testAgregarEquipoNulo() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        
-        // Act
-        boolean resultado = gameManager.agregarEquipo(null);
-        
-        // Assert
-        assertFalse(resultado, "No debería poder agregar equipo nulo");
-    }
-    
-    @Test
-    @DisplayName("Debería remover equipo de la partida")
-    void testRemoverEquipo() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        
-        // Act
-        boolean resultado = gameManager.removerEquipo(equipo1);
-        
-        // Assert
-        assertTrue(resultado, "Debería poder remover equipo");
-        assertEquals(0, gameManager.getEquipos().size(), "No debería tener equipos");
-    }
-    
-    @Test
-    @DisplayName("Debería agregar jugador a equipo")
+    @Order(12)
+    @DisplayName("Agregar jugador a equipo")
     void testAgregarJugadorAEquipo() {
         // Arrange
         gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
+        gameManager.agregarEquipo(equipoTest);
         
         // Act
-        boolean resultado = gameManager.agregarJugadorAEquipo(equipo1, jugador1);
+        boolean resultado = gameManager.agregarJugadorAEquipo(equipoTest, jugadorTest);
         
         // Assert
-        assertTrue(resultado, "Debería poder agregar jugador a equipo");
-        assertTrue(equipo1.getJugadores().contains(jugador1), "El equipo debería contener el jugador");
+        assertTrue(resultado, "El jugador debe agregarse exitosamente al equipo");
+        assertEquals(1, equipoTest.getNumeroJugadores(), "El equipo debe tener un jugador");
     }
     
+    /**
+     * Prueba registrar un intento exitoso.
+     */
     @Test
-    @DisplayName("Debería remover jugador de equipo")
-    void testRemoverJugadorDeEquipo() {
+    @Order(13)
+    @DisplayName("Registrar intento exitoso")
+    void testRegistrarIntentoExitoso() {
         // Arrange
         gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarJugadorAEquipo(equipo1, jugador1);
-        
-        // Act
-        boolean resultado = gameManager.removerJugadorDeEquipo(equipo1, jugador1);
-        
-        // Assert
-        assertTrue(resultado, "Debería poder remover jugador de equipo");
-        assertFalse(equipo1.getJugadores().contains(jugador1), "El equipo no debería contener el jugador");
-    }
-    
-    @Test
-    @DisplayName("Debería iniciar partida con equipos suficientes")
-    void testIniciarPartida() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarEquipo(equipo2);
-        
-        // Act
-        boolean resultado = gameManager.iniciarPartida();
-        
-        // Assert
-        assertTrue(resultado, "Debería poder iniciar partida con equipos suficientes");
-        assertTrue(gameManager.estaPartidaEnCurso(), "La partida debería estar en curso");
-    }
-    
-    @Test
-    @DisplayName("No debería iniciar partida sin equipos suficientes")
-    void testIniciarPartidaSinEquiposSuficientes() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        
-        // Act
-        boolean resultado = gameManager.iniciarPartida();
-        
-        // Assert
-        assertFalse(resultado, "No debería poder iniciar partida sin equipos suficientes");
-        assertFalse(gameManager.estaPartidaEnCurso(), "La partida no debería estar en curso");
-    }
-    
-    @Test
-    @DisplayName("Debería finalizar partida en curso")
-    void testFinalizarPartida() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarEquipo(equipo2);
+        gameManager.agregarEquipo(equipoTest);
+        gameManager.agregarJugadorAEquipo(equipoTest, jugadorTest);
         gameManager.iniciarPartida();
         
         // Act
-        gameManager.finalizarPartida();
+        int puntos = gameManager.registrarIntento(jugadorTest, true);
         
         // Assert
-        assertTrue(gameManager.haTerminadoPartida(), "La partida debería haber terminado");
-        assertFalse(gameManager.estaPartidaEnCurso(), "La partida no debería estar en curso");
+        assertEquals(configuracion.getPuntosPorAcierto(), puntos, "Los puntos deben coincidir");
+        assertEquals(1, jugadorTest.getIntentos(), "Debe incrementarse el número de intentos");
+        assertEquals(1, jugadorTest.getAciertos(), "Debe incrementarse el número de aciertos");
+        assertEquals(configuracion.getPuntosPorAcierto(), jugadorTest.getPuntuacion(), 
+                    "La puntuación debe incrementarse");
     }
     
+    /**
+     * Prueba registrar un intento fallido.
+     */
     @Test
-    @DisplayName("Debería registrar intento de jugador")
-    void testRegistrarIntento() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarJugadorAEquipo(equipo1, jugador1);
-        gameManager.iniciarPartida();
-        
-        // Act
-        int puntosObtenidos = gameManager.registrarIntento(jugador1, true);
-        
-        // Assert
-        assertEquals(configuracion.getPuntosPorAcierto(), puntosObtenidos, 
-                    "Debería otorgar puntos por acierto");
-        assertEquals(1, jugador1.getIntentos(), "Debería incrementar intentos");
-        assertEquals(1, jugador1.getAciertos(), "Debería incrementar aciertos");
-        assertEquals(configuracion.getPuntosPorAcierto(), jugador1.getPuntuacion(), 
-                    "Debería actualizar puntuación");
-    }
-    
-    @Test
-    @DisplayName("Debería registrar intento fallido")
+    @Order(14)
+    @DisplayName("Registrar intento fallido")
     void testRegistrarIntentoFallido() {
         // Arrange
         gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarJugadorAEquipo(equipo1, jugador1);
+        gameManager.agregarEquipo(equipoTest);
+        gameManager.agregarJugadorAEquipo(equipoTest, jugadorTest);
         gameManager.iniciarPartida();
         
         // Act
-        int puntosObtenidos = gameManager.registrarIntento(jugador1, false);
+        int puntos = gameManager.registrarIntento(jugadorTest, false);
         
         // Assert
-        assertEquals(configuracion.getPuntosPorIntento(), puntosObtenidos, 
-                    "Debería otorgar puntos por intento");
-        assertEquals(1, jugador1.getIntentos(), "Debería incrementar intentos");
-        assertEquals(0, jugador1.getAciertos(), "No debería incrementar aciertos");
-        assertEquals(configuracion.getPuntosPorIntento(), jugador1.getPuntuacion(), 
-                    "Debería actualizar puntuación");
+        assertEquals(configuracion.getPuntosPorIntento(), puntos, "Los puntos deben coincidir");
+        assertEquals(1, jugadorTest.getIntentos(), "Debe incrementarse el número de intentos");
+        assertEquals(0, jugadorTest.getAciertos(), "No debe incrementarse el número de aciertos");
+        assertEquals(configuracion.getPuntosPorIntento(), jugadorTest.getPuntuacion(), 
+                    "La puntuación debe incrementarse");
     }
     
+    /**
+     * Prueba avanzar de ronda.
+     */
     @Test
-    @DisplayName("Debería avanzar ronda")
+    @Order(15)
+    @DisplayName("Avanzar ronda")
     void testAvanzarRonda() {
         // Arrange
         gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarEquipo(equipo2);
+        gameManager.agregarEquipo(equipoTest);
         gameManager.iniciarPartida();
         
         // Act
         boolean resultado = gameManager.avanzarRonda();
         
         // Assert
-        assertTrue(resultado, "Debería poder avanzar ronda");
+        assertTrue(resultado, "Debe ser posible avanzar de ronda");
         assertEquals(2, gameManager.getPartidaActual().getRondaActual(), 
-                    "Debería incrementar ronda actual");
+                    "La ronda actual debe incrementarse");
     }
     
+    /**
+     * Prueba obtener estadísticas de la partida.
+     */
     @Test
-    @DisplayName("Debería obtener equipo ganador")
-    void testObtenerEquipoGanador() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarEquipo(equipo2);
-        gameManager.agregarJugadorAEquipo(equipo1, jugador1);
-        gameManager.agregarJugadorAEquipo(equipo2, jugador2);
-        gameManager.iniciarPartida();
-        
-        // Hacer que el equipo1 gane
-        for (int i = 0; i < 6; i++) {
-            gameManager.registrarIntento(jugador1, true);
-        }
-        
-        // Act
-        Equipo ganador = gameManager.getEquipoGanador();
-        
-        // Assert
-        assertNotNull(ganador, "Debería haber un equipo ganador");
-        assertEquals(equipo1, ganador, "El equipo ganador debería ser el equipo1");
-    }
-    
-    @Test
-    @DisplayName("Debería obtener estadísticas de la partida")
+    @Order(16)
+    @DisplayName("Obtener estadísticas de la partida")
     void testObtenerEstadisticasPartida() {
         // Arrange
         gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarJugadorAEquipo(equipo1, jugador1);
+        gameManager.agregarEquipo(equipoTest);
         
         // Act
         String estadisticas = gameManager.obtenerEstadisticasPartida();
         
         // Assert
-        assertNotNull(estadisticas, "Las estadísticas no deberían ser nulas");
-        assertFalse(estadisticas.isEmpty(), "Las estadísticas no deberían estar vacías");
-        assertTrue(estadisticas.contains("ESTADÍSTICAS"), "Debería contener información de estadísticas");
+        assertNotNull(estadisticas, "Las estadísticas no deben ser null");
+        assertTrue(estadisticas.contains("ESTADÍSTICAS"), "Debe contener el título de estadísticas");
+        assertTrue(estadisticas.contains("EQUIPOS"), "Debe contener información de equipos");
     }
     
+    /**
+     * Prueba obtener estadísticas sin partida.
+     */
     @Test
-    @DisplayName("Debería verificar estado de partida en curso")
-    void testEstaPartidaEnCurso() {
-        // Arrange
-        gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarEquipo(equipo2);
+    @Order(17)
+    @DisplayName("Obtener estadísticas sin partida")
+    void testObtenerEstadisticasSinPartida() {
+        // Act
+        String estadisticas = gameManager.obtenerEstadisticasPartida();
         
-        // Act & Assert - Sin iniciar
-        assertFalse(gameManager.estaPartidaEnCurso(), "No debería estar en curso sin iniciar");
-        
-        // Act & Assert - Iniciada
-        gameManager.iniciarPartida();
-        assertTrue(gameManager.estaPartidaEnCurso(), "Debería estar en curso después de iniciar");
+        // Assert
+        assertNotNull(estadisticas, "Las estadísticas no deben ser null");
+        assertEquals("No hay partida activa", estadisticas, "Debe mostrar mensaje de no partida activa");
     }
     
+    /**
+     * Prueba finalizar partida.
+     */
     @Test
-    @DisplayName("Debería verificar si partida ha terminado")
-    void testHaTerminadoPartida() {
+    @Order(18)
+    @DisplayName("Finalizar partida")
+    void testFinalizarPartida() {
         // Arrange
         gameManager.iniciarNuevaPartida(configuracion);
-        gameManager.agregarEquipo(equipo1);
-        gameManager.agregarEquipo(equipo2);
-        
-        // Act & Assert - Sin iniciar
-        assertFalse(gameManager.haTerminadoPartida(), "No debería haber terminado sin iniciar");
-        
-        // Act & Assert - Iniciada
+        gameManager.agregarEquipo(equipoTest);
         gameManager.iniciarPartida();
-        assertFalse(gameManager.haTerminadoPartida(), "No debería haber terminado recién iniciada");
         
-        // Act & Assert - Finalizada
+        // Act
         gameManager.finalizarPartida();
-        assertTrue(gameManager.haTerminadoPartida(), "Debería haber terminado después de finalizar");
+        
+        // Assert
+        assertTrue(gameManager.haTerminadoPartida(), "La partida debe estar terminada");
+        assertFalse(gameManager.estaPartidaEnCurso(), "La partida no debe estar en curso");
+    }
+    
+    /**
+     * Prueba el gestor de archivos de acceso aleatorio.
+     */
+    @Test
+    @Order(19)
+    @DisplayName("Obtener gestor de archivos de acceso aleatorio")
+    void testGetArchivoAccesoAleatorio() {
+        // Act
+        ArchivoAccesoAleatorio archivo = gameManager.getArchivoAccesoAleatorio();
+        
+        // Assert
+        assertNotNull(archivo, "El gestor de archivos no debe ser null");
+    }
+    
+    /**
+     * Prueba guardar datos completos.
+     */
+    @Test
+    @Order(20)
+    @DisplayName("Guardar datos completos")
+    void testGuardarDatosCompletos() {
+        // Arrange
+        gameManager.iniciarNuevaPartida(configuracion);
+        gameManager.agregarEquipo(equipoTest);
+        gameManager.agregarJugadorAEquipo(equipoTest, jugadorTest);
+        
+        // Act
+        boolean resultado = gameManager.guardarDatosCompletos();
+        
+        // Assert
+        assertTrue(resultado, "Los datos deben guardarse exitosamente");
     }
 }

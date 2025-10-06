@@ -1,2 +1,15 @@
+<<<<<<< HEAD
 Daniel felipe Santamaria Duran 20242020023
 Carlos Andres Garcia Ramos 20242020206
+=======
+Integrantes del Grupo:
+
+And_Gar03 - Desarrollador Principal
+- Implementación de arquitectura MVC
+- Desarrollo de funcionalidades del juego
+- Implementación de persistencia con archivos de acceso aleatorio
+- Creación de pruebas JUnit completas
+- Documentación técnica
+- Corrección de problemas de interfaz
+- Implementación de principios SOLID
+>>>>>>> b9faf39 (Andres)

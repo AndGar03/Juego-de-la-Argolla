@@ -7,8 +7,8 @@ import java.io.Serializable;
  * Esta clase contiene únicamente la lógica de negocio del jugador
  * sin dependencias de la interfaz gráfica.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
 public class Jugador implements Serializable {
     

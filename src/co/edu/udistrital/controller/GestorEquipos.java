@@ -9,8 +9,8 @@ import java.util.List;
  * Implementa el principio de responsabilidad única (SRP) al manejar
  * únicamente las operaciones relacionadas con equipos.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
 public class GestorEquipos {
     

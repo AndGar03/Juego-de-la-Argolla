@@ -10,8 +10,8 @@ import java.util.List;
  * Una partida contiene la información de los equipos participantes,
  * el estado del juego y las estadísticas de la partida.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
 public class Partida implements Serializable {
     

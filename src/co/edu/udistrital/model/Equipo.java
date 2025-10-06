@@ -9,8 +9,8 @@ import java.util.List;
  * Un equipo está compuesto por varios jugadores y mantiene
  * estadísticas agregadas del equipo.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
 public class Equipo implements Serializable {
     

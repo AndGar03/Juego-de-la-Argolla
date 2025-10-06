@@ -7,8 +7,8 @@ import java.io.Serializable;
  * Esta clase contiene todos los parámetros configurables
  * que afectan el comportamiento del juego.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
 public class ConfiguracionJuego implements Serializable {
     

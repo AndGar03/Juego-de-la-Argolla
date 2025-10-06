@@ -2,6 +2,7 @@ package co.edu.udistrital.controller;
 
 import co.edu.udistrital.model.*;
 import co.edu.udistrital.persistence.PersistenciaManager;
+import co.edu.udistrital.persistence.ArchivoAccesoAleatorio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -11,8 +12,8 @@ import java.util.UUID;
  * Implementa el patrón de responsabilidad única (SRP) al delegar
  * responsabilidades específicas a gestores especializados.
  * 
- * @author Sistema Juego de la Argolla
- * @version 1.0
+ * @author And_Gar03
+ * @version 2.0
  */
 public class GameManager implements IControladorJuego {
     
@@ -28,6 +29,9 @@ public class GameManager implements IControladorJuego {
     /** Gestor de persistencia */
     private PersistenciaManager persistenciaManager;
     
+    /** Gestor de archivos de acceso aleatorio */
+    private ArchivoAccesoAleatorio archivoAccesoAleatorio;
+    
     /** Partida actual */
     private Partida partidaActual;
     
@@ -36,15 +40,19 @@ public class GameManager implements IControladorJuego {
     
     /**
      * Constructor del GameManager.
-     * Inicializa todos los gestores especializados.
+     * Inicializa todos los gestores especializados y carga datos guardados.
      */
     public GameManager() {
         this.gestorEquipos = new GestorEquipos();
         this.gestorJugadores = new GestorJugadores();
         this.gestorPartidas = new GestorPartidas();
         this.persistenciaManager = new PersistenciaManager();
+        this.archivoAccesoAleatorio = new ArchivoAccesoAleatorio();
         this.configuracion = new ConfiguracionJuego();
         this.partidaActual = null;
+        
+        // Cargar datos guardados al inicializar
+        cargarDatosGuardados();
     }
     
     @Override
@@ -63,6 +71,36 @@ public class GameManager implements IControladorJuego {
         );
         
         return true;
+    }
+    
+    /**
+     * Crea un nuevo equipo.
+     * 
+     * @param nombre Nombre del equipo
+     * @param color Color del equipo
+     * @return Equipo creado, null si hay error
+     */
+    public Equipo crearEquipo(String nombre, String color) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return null;
+        }
+        
+        Equipo equipo = new Equipo(nombre.trim(), color != null ? color : "Azul");
+        return equipo;
+    }
+    
+    /**
+     * Crea un nuevo jugador.
+     * 
+     * @param nombre Nombre del jugador
+     * @return Jugador creado, null si hay error
+     */
+    public Jugador crearJugador(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return null;
+        }
+        
+        return new Jugador(nombre.trim());
     }
     
     @Override
@@ -315,5 +353,73 @@ public class GameManager implements IControladorJuego {
      */
     public GestorPartidas getGestorPartidas() {
         return gestorPartidas;
+    }
+    
+    /**
+     * Carga los datos guardados desde los archivos de acceso aleatorio.
+     * Este método se ejecuta al inicializar el programa.
+     */
+    private void cargarDatosGuardados() {
+        try {
+            // Cargar equipos
+            List<Equipo> equiposCargados = archivoAccesoAleatorio.cargarEquipos();
+            for (Equipo equipo : equiposCargados) {
+                gestorEquipos.agregarEquipo(equipo);
+            }
+            
+            // Cargar jugadores y asociarlos a sus equipos
+            List<Jugador> jugadoresCargados = archivoAccesoAleatorio.cargarJugadores();
+            for (Jugador jugador : jugadoresCargados) {
+                // Buscar el equipo correspondiente (se necesita implementar método para obtener equipo por nombre)
+                // Por ahora, agregamos el jugador al gestor de jugadores
+                gestorJugadores.agregarJugador(jugador);
+            }
+        } catch (Exception e) {
+            // En caso de error, continuar sin datos cargados
+        }
+    }
+    
+    /**
+     * Guarda todos los datos actuales en los archivos de acceso aleatorio.
+     * Este método se ejecuta al finalizar el juego.
+     * 
+     * @return true si se guardaron exitosamente, false en caso contrario
+     */
+    public boolean guardarDatosCompletos() {
+        boolean exito = true;
+        
+        try {
+            // Limpiar archivos existentes
+            archivoAccesoAleatorio.limpiarDatos();
+            
+            // Guardar equipos
+            List<Equipo> equipos = gestorEquipos.getEquipos();
+            for (Equipo equipo : equipos) {
+                if (!archivoAccesoAleatorio.guardarEquipo(equipo)) {
+                    exito = false;
+                }
+                
+                // Guardar jugadores del equipo
+                List<Jugador> jugadores = equipo.getJugadores();
+                for (Jugador jugador : jugadores) {
+                    if (!archivoAccesoAleatorio.guardarJugador(jugador, equipo.getNombre())) {
+                        exito = false;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            exito = false;
+        }
+        
+        return exito;
+    }
+    
+    /**
+     * Obtiene el gestor de archivos de acceso aleatorio.
+     * 
+     * @return Gestor de archivos de acceso aleatorio
+     */
+    public ArchivoAccesoAleatorio getArchivoAccesoAleatorio() {
+        return archivoAccesoAleatorio;
     }
 }
