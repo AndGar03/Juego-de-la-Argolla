@@ -8,7 +8,7 @@ import java.io.Serializable;
  * sin dependencias de la interfaz gráfica.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class Jugador implements Serializable {
     

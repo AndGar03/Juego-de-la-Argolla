@@ -15,7 +15,7 @@ import java.util.List;
  * Implementa el patrón MVC al delegar toda la lógica al controlador.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class DialogoGestionEquipos extends JDialog {
     

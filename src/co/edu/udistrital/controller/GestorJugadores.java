@@ -10,7 +10,7 @@ import java.util.List;
  * únicamente las operaciones relacionadas con jugadores.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class GestorJugadores {
     

@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * al controlador a través de la vista principal.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class DialogoConfiguracion extends JDialog {
     

@@ -1,6 +1,7 @@
 package co.edu.udistrital.view;
 
 import co.edu.udistrital.controller.IControladorJuego;
+import co.edu.udistrital.controller.GameManager;
 import co.edu.udistrital.model.Equipo;
 import co.edu.udistrital.model.Jugador;
 import co.edu.udistrital.model.Partida;
@@ -17,7 +18,7 @@ import java.util.List;
  * componentes de interfaz gráfica y delegar toda la lógica al controlador.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class VistaPrincipal extends JFrame {
     
@@ -42,6 +43,10 @@ public class VistaPrincipal extends JFrame {
     private JButton botonConfiguracion;
     private JButton botonGuardarPartida;
     private JButton botonCargarPartida;
+    private JButton botonAgregarEquipo;
+    private JButton botonAgregarJugador;
+    private JButton botonSimularIntento;
+    private JButton botonGuardarDatos;
     
     private JList<Equipo> listaEquipos;
     private JList<Jugador> listaJugadores;
@@ -92,6 +97,10 @@ public class VistaPrincipal extends JFrame {
         botonConfiguracion = new JButton("Configuración");
         botonGuardarPartida = new JButton("Guardar Partida");
         botonCargarPartida = new JButton("Cargar Partida");
+        botonAgregarEquipo = new JButton("Agregar Equipo");
+        botonAgregarJugador = new JButton("Agregar Jugador");
+        botonSimularIntento = new JButton("Simular Intento");
+        botonGuardarDatos = new JButton("Guardar Datos");
         
         // Listas
         listaEquipos = new JList<>();
@@ -125,14 +134,19 @@ public class VistaPrincipal extends JFrame {
         panelJugadores.setBorder(BorderFactory.createTitledBorder("Jugadores del Equipo Seleccionado"));
         panelJugadores.add(scrollJugadores, BorderLayout.CENTER);
         
-        // Configurar panel de partida
+        // Configurar panel de partida con GridLayout para mostrar todos los botones
         panelPartida.setBorder(BorderFactory.createTitledBorder("Control de Partida"));
+        panelPartida.setLayout(new GridLayout(2, 5, 5, 5)); // 2 filas, 5 columnas con espaciado
         panelPartida.add(botonNuevaPartida);
         panelPartida.add(botonIniciarPartida);
         panelPartida.add(botonFinalizarPartida);
         panelPartida.add(botonConfiguracion);
+        panelPartida.add(botonAgregarEquipo);
         panelPartida.add(botonGuardarPartida);
         panelPartida.add(botonCargarPartida);
+        panelPartida.add(botonAgregarJugador);
+        panelPartida.add(botonSimularIntento);
+        panelPartida.add(botonGuardarDatos);
         
         // Configurar panel de estadísticas
         panelEstadisticas.setBorder(BorderFactory.createTitledBorder("Estadísticas"));
@@ -215,6 +229,34 @@ public class VistaPrincipal extends JFrame {
             }
         });
         
+        botonAgregarEquipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDialogoAgregarEquipo();
+            }
+        });
+        
+        botonAgregarJugador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarDialogoAgregarJugador();
+            }
+        });
+        
+        botonSimularIntento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                simularIntento();
+            }
+        });
+        
+        botonGuardarDatos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guardarDatosCompletos();
+            }
+        });
+        
         // Evento de selección de equipo
         listaEquipos.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
@@ -289,6 +331,10 @@ public class VistaPrincipal extends JFrame {
         botonFinalizarPartida.setEnabled(partidaEnCurso);
         botonGuardarPartida.setEnabled(hayPartida);
         botonCargarPartida.setEnabled(!partidaEnCurso);
+        botonAgregarEquipo.setEnabled(hayPartida && !partidaEnCurso);
+        botonAgregarJugador.setEnabled(hayPartida && !partidaEnCurso);
+        botonSimularIntento.setEnabled(partidaEnCurso);
+        botonGuardarDatos.setEnabled(hayPartida);
     }
     
     /**
@@ -346,5 +392,95 @@ public class VistaPrincipal extends JFrame {
         int respuesta = JOptionPane.showConfirmDialog(this, mensaje, "Confirmar", 
                                                     JOptionPane.YES_NO_OPTION);
         return respuesta == JOptionPane.YES_OPTION;
+    }
+    
+    /**
+     * Muestra el diálogo para agregar un equipo.
+     */
+    private void mostrarDialogoAgregarEquipo() {
+        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre del equipo:");
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            String color = JOptionPane.showInputDialog(this, "Ingrese el color del equipo:");
+            if (color == null) color = "Azul";
+            
+            Equipo equipo = controlador.crearEquipo(nombre.trim(), color.trim());
+            if (equipo != null && controlador.agregarEquipo(equipo)) {
+                mostrarMensaje("Equipo '" + nombre + "' agregado exitosamente.");
+                actualizarVista();
+            } else {
+                mostrarError("Error al agregar el equipo. Verifique que no exceda el límite de equipos.");
+            }
+        }
+    }
+    
+    /**
+     * Muestra el diálogo para agregar un jugador.
+     */
+    private void mostrarDialogoAgregarJugador() {
+        Equipo equipoSeleccionado = listaEquipos.getSelectedValue();
+        if (equipoSeleccionado == null) {
+            mostrarError("Por favor seleccione un equipo primero.");
+            return;
+        }
+        
+        String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre del jugador:");
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            Jugador jugador = controlador.crearJugador(nombre.trim());
+            if (jugador != null && controlador.agregarJugadorAEquipo(equipoSeleccionado, jugador)) {
+                mostrarMensaje("Jugador '" + nombre + "' agregado al equipo '" + equipoSeleccionado.getNombre() + "' exitosamente.");
+                actualizarVista();
+            } else {
+                mostrarError("Error al agregar el jugador. Verifique que no exceda el límite de jugadores por equipo.");
+            }
+        }
+    }
+    
+    /**
+     * Simula un intento de lanzamiento de argolla.
+     */
+    private void simularIntento() {
+        Jugador jugadorSeleccionado = listaJugadores.getSelectedValue();
+        if (jugadorSeleccionado == null) {
+            mostrarError("Por favor seleccione un jugador primero.");
+            return;
+        }
+        
+        if (!controlador.estaPartidaEnCurso()) {
+            mostrarError("La partida no está en curso.");
+            return;
+        }
+        
+        // Simular un intento (50% de probabilidad de acierto)
+        boolean esAcierto = Math.random() < 0.5;
+        int puntos = controlador.registrarIntento(jugadorSeleccionado, esAcierto);
+        
+        String resultado = esAcierto ? "¡Acierto! +" + puntos + " puntos" : "Falló +" + puntos + " puntos";
+        mostrarMensaje("Jugador: " + jugadorSeleccionado.getNombre() + "\nResultado: " + resultado);
+        
+        actualizarVista();
+        
+        // Verificar si la partida ha terminado
+        if (controlador.haTerminadoPartida()) {
+            Equipo ganador = controlador.getEquipoGanador();
+            if (ganador != null) {
+                mostrarMensaje("¡Partida terminada!\n¡El equipo ganador es: " + ganador.getNombre() + "!");
+            }
+        }
+    }
+    
+    /**
+     * Guarda todos los datos en archivos de acceso aleatorio.
+     */
+    private void guardarDatosCompletos() {
+        if (controlador instanceof GameManager) {
+            GameManager gameManager = (GameManager) controlador;
+            if (gameManager.guardarDatosCompletos()) {
+                mostrarMensaje("Datos guardados exitosamente en archivos de acceso aleatorio.");
+            } else {
+                mostrarError("Error al guardar los datos. Intente nuevamente.");
+            }
+        } else {
+            mostrarError("Error: No se puede acceder al gestor de datos.");
+        }
     }
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * que afectan el comportamiento del juego.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class ConfiguracionJuego implements Serializable {
     

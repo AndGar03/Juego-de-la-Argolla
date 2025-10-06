@@ -12,7 +12,7 @@ import java.util.List;
  * la vista del controlador concreto.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public interface IControladorJuego {
     
@@ -161,4 +161,21 @@ public interface IControladorJuego {
      * @return true si se cargó exitosamente, false en caso contrario
      */
     boolean cargarPartida(String idPartida);
+    
+    /**
+     * Crea un nuevo equipo.
+     * 
+     * @param nombre Nombre del equipo
+     * @param color Color del equipo
+     * @return Equipo creado, null si hay error
+     */
+    Equipo crearEquipo(String nombre, String color);
+    
+    /**
+     * Crea un nuevo jugador.
+     * 
+     * @param nombre Nombre del jugador
+     * @return Jugador creado, null si hay error
+     */
+    Jugador crearJugador(String nombre);
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * estadísticas agregadas del equipo.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class Equipo implements Serializable {
     

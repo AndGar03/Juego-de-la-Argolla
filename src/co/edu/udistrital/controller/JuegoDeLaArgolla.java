@@ -1,59 +1,29 @@
-package co.edu.udistrital;
+package co.edu.udistrital.controller;
 
-import co.edu.udistrital.controller.GameManager;
-import co.edu.udistrital.controller.IControladorJuego;
-import co.edu.udistrital.view.VistaPrincipal;
 import co.edu.udistrital.model.ConfiguracionJuego;
 import co.edu.udistrital.persistence.PersistenciaManager;
-
-import javax.swing.SwingUtilities;
+import co.edu.udistrital.view.VistaPrincipal;
 
 /**
- * Clase principal (Launcher) del Juego de la Argolla.
- * Implementa el principio de responsabilidad única (SRP) al tener
- * únicamente la responsabilidad de inicializar la aplicación.
+ * Clase principal que maneja la inicialización del juego.
+ * Implementa el patrón de responsabilidad única al tener
+ * únicamente la responsabilidad de configurar y lanzar la aplicación.
  * 
  * Esta clase instancia el Modelo, la Vista y el Controlador,
  * los enlaza mediante inyección de dependencias y hace visible
  * la aplicación, sin contener lógica de negocio.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
-public class Launcher {
-    
-    /**
-     * Método principal de la aplicación.
-     * 
-     * @param args Argumentos de línea de comandos (no utilizados)
-     */
-    public static void main(String[] args) {
-        // Configurar el look and feel del sistema
-        configurarLookAndFeel();
-        
-        // Ejecutar la inicialización en el hilo de eventos de Swing
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                inicializarAplicacion();
-            }
-        });
-    }
-    
-    /**
-     * Configura el look and feel del sistema para la aplicación.
-     */
-    private static void configurarLookAndFeel() {
-        /*    // Intentar usar el look and feel del sistema
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());*/
-    }
-    
+public class JuegoDeLaArgolla {
+
     /**
      * Inicializa la aplicación creando e interconectando todos los componentes.
      * Implementa la inyección de dependencias (DIP) al inyectar el controlador
      * en la vista a través de su constructor.
      */
-    private static void inicializarAplicacion() {
+    public void inicializar() {
         try {
             // 1. Crear el gestor de persistencia
             PersistenciaManager persistenciaManager = new PersistenciaManager();

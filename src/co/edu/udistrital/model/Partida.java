@@ -11,7 +11,7 @@ import java.util.List;
  * el estado del juego y las estadísticas de la partida.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class Partida implements Serializable {
     

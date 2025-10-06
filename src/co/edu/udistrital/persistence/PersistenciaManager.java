@@ -13,7 +13,7 @@ import java.util.Properties;
  * únicamente las operaciones de persistencia de datos.
  * 
  * @author Sansantax
- * @version 1.0
+ * @version 3.0
  */
 public class PersistenciaManager {
     

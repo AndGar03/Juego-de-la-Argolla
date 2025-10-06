@@ -1,0 +1,495 @@
+UML Class Diagram - Juego de la Argolla v3.0
+=============================================
+
+Author: Sansantax
+Version: 3.0
+
+PACKAGE: co.edu.udistrital.model
+--------------------------------
+
+<<interface>> Serializable
++ serialVersionUID: long
+
+Jugador implements Serializable
+------------------------------
+- nombre: String
+- puntuacion: int
+- intentos: int
+- aciertos: int
++ Jugador()
++ Jugador(nombre: String)
++ getNombre(): String
++ setNombre(nombre: String): void
++ getPuntuacion(): int
++ setPuntuacion(puntuacion: int): void
++ getIntentos(): int
++ setIntentos(intentos: int): void
++ getAciertos(): int
++ setAciertos(aciertos: int): void
++ incrementarIntentos(): void
++ incrementarAciertos(): void
++ calcularPorcentajeAciertos(): double
++ agregarPuntos(puntos: int): void
++ reiniciarEstadisticas(): void
++ tieneNombreValido(): boolean
++ toString(): String
++ equals(obj: Object): boolean
++ hashCode(): int
+
+Equipo implements Serializable
+-----------------------------
+- nombre: String
+- jugadores: List<Jugador>
+- color: String
++ Equipo()
++ Equipo(nombre: String, color: String)
++ getNombre(): String
++ setNombre(nombre: String): void
++ getJugadores(): List<Jugador>
++ setJugadores(jugadores: List<Jugador>): void
++ getColor(): String
++ setColor(color: String): void
++ agregarJugador(jugador: Jugador): boolean
++ removerJugador(jugador: Jugador): boolean
++ getNumeroJugadores(): int
++ getPuntuacionTotal(): int
++ getTotalIntentos(): int
++ getTotalAciertos(): int
++ getPorcentajeAciertos(): double
++ getJugadorConMayorPuntuacion(): Jugador
++ tieneJugadores(): boolean
++ estaCompleto(maxJugadores: int): boolean
++ reiniciarEstadisticas(): void
++ buscarJugadorPorNombre(nombre: String): Jugador
++ toString(): String
++ equals(obj: Object): boolean
++ hashCode(): int
+
+Partida implements Serializable
+------------------------------
+- id: String
+- equipos: List<Equipo>
+- estado: String
+- fechaInicio: LocalDateTime
+- fechaFin: LocalDateTime
+- rondaActual: int
+- maxRondas: int
+- puntosParaGanar: int
++ Partida(id: String, maxRondas: int, puntosParaGanar: int)
++ getId(): String
++ getEquipos(): List<Equipo>
++ getEstado(): String
++ getFechaInicio(): LocalDateTime
++ getFechaFin(): LocalDateTime
++ getRondaActual(): int
++ getMaxRondas(): int
++ getPuntosParaGanar(): int
++ agregarEquipo(equipo: Equipo): boolean
++ removerEquipo(equipo: Equipo): boolean
++ getNumeroEquipos(): int
++ iniciarPartida(): void
++ finalizarPartida(): void
++ cancelarPartida(): void
++ estaEnCurso(): boolean
++ haTerminado(): boolean
++ sePuedeIniciar(): boolean
++ avanzarRonda(): void
++ getEquipoGanador(): Equipo
++ toString(): String
++ equals(obj: Object): boolean
++ hashCode(): int
+
+ConfiguracionJuego implements Serializable
+-----------------------------------------
+- maxEquiposPorPartida: int
+- maxJugadoresPorEquipo: int
+- maxRondasPorPartida: int
+- puntosParaGanar: int
+- puntosPorAcierto: int
+- puntosPorIntento: int
+- tiempoLimitePorRonda: int
+- dificultad: String
+- efectosSonido: boolean
+- efectosVisuales: boolean
++ ConfiguracionJuego()
++ getMaxEquiposPorPartida(): int
++ setMaxEquiposPorPartida(maxEquipos: int): void
++ getMaxJugadoresPorEquipo(): int
++ setMaxJugadoresPorEquipo(maxJugadores: int): void
++ getMaxRondasPorPartida(): int
++ setMaxRondasPorPartida(maxRondas: int): void
++ getPuntosParaGanar(): int
++ setPuntosParaGanar(puntos: int): void
++ getPuntosPorAcierto(): int
++ setPuntosPorAcierto(puntos: int): void
++ getPuntosPorIntento(): int
++ setPuntosPorIntento(puntos: int): void
++ getTiempoLimitePorRonda(): int
++ setTiempoLimitePorRonda(tiempo: int): void
++ getDificultad(): String
++ setDificultad(dificultad: String): void
++ isEfectosSonido(): boolean
++ setEfectosSonido(efectos: boolean): void
++ isEfectosVisuales(): boolean
++ setEfectosVisuales(efectos: boolean): void
++ esValida(): boolean
++ toString(): String
++ equals(obj: Object): boolean
++ hashCode(): int
+
+PACKAGE: co.edu.udistrital.controller
+------------------------------------
+
+<<interface>> IControladorJuego
++ iniciarNuevaPartida(configuracion: ConfiguracionJuego): boolean
++ agregarEquipo(equipo: Equipo): boolean
++ removerEquipo(equipo: Equipo): boolean
++ agregarJugadorAEquipo(equipo: Equipo, jugador: Jugador): boolean
++ removerJugadorDeEquipo(equipo: Equipo, jugador: Jugador): boolean
++ iniciarPartida(): boolean
++ finalizarPartida(): void
++ cancelarPartida(): void
++ registrarIntento(jugador: Jugador, esAcierto: boolean): int
++ avanzarRonda(): boolean
++ getPartidaActual(): Partida
++ getEquipos(): List<Equipo>
++ getEquipoGanador(): Equipo
++ getConfiguracion(): ConfiguracionJuego
++ setConfiguracion(configuracion: ConfiguracionJuego): void
++ estaPartidaEnCurso(): boolean
++ haTerminadoPartida(): boolean
++ obtenerEstadisticasPartida(): String
++ guardarPartida(): boolean
++ cargarPartida(idPartida: String): boolean
++ crearEquipo(nombre: String, color: String): Equipo
++ crearJugador(nombre: String): Jugador
+
+GameManager implements IControladorJuego
+---------------------------------------
+- gestorEquipos: GestorEquipos
+- gestorJugadores: GestorJugadores
+- gestorPartidas: GestorPartidas
+- persistenciaManager: PersistenciaManager
+- archivoAccesoAleatorio: ArchivoAccesoAleatorio
+- partidaActual: Partida
+- configuracion: ConfiguracionJuego
++ GameManager()
++ iniciarNuevaPartida(configuracion: ConfiguracionJuego): boolean
++ crearEquipo(nombre: String, color: String): Equipo
++ crearJugador(nombre: String): Jugador
++ agregarEquipo(equipo: Equipo): boolean
++ removerEquipo(equipo: Equipo): boolean
++ agregarJugadorAEquipo(equipo: Equipo, jugador: Jugador): boolean
++ removerJugadorDeEquipo(equipo: Equipo, jugador: Jugador): boolean
++ iniciarPartida(): boolean
++ finalizarPartida(): void
++ cancelarPartida(): void
++ registrarIntento(jugador: Jugador, esAcierto: boolean): int
++ avanzarRonda(): boolean
++ getPartidaActual(): Partida
++ getEquipos(): List<Equipo>
++ getEquipoGanador(): Equipo
++ getConfiguracion(): ConfiguracionJuego
++ setConfiguracion(configuracion: ConfiguracionJuego): void
++ estaPartidaEnCurso(): boolean
++ haTerminadoPartida(): boolean
++ obtenerEstadisticasPartida(): String
++ guardarPartida(): boolean
++ cargarPartida(idPartida: String): boolean
++ getGestorEquipos(): GestorEquipos
++ getGestorJugadores(): GestorJugadores
++ getGestorPartidas(): GestorPartidas
++ cargarDatosGuardados(): void
++ guardarDatosCompletos(): boolean
++ getArchivoAccesoAleatorio(): ArchivoAccesoAleatorio
+- verificarCondicionVictoria(): void
+
+GestorEquipos
+-------------
+- equipos: List<Equipo>
++ GestorEquipos()
++ agregarEquipo(equipo: Equipo): boolean
++ removerEquipo(equipo: Equipo): boolean
++ obtenerTodosLosEquipos(): List<Equipo>
++ buscarEquipoPorNombre(nombre: String): Equipo
++ getNumeroEquipos(): int
++ existeEquipo(nombre: String): boolean
++ existeEquipo(equipo: Equipo): boolean
++ limpiarEquipos(): void
++ obtenerEquiposOrdenadosPorPuntuacion(): List<Equipo>
++ obtenerEquiposOrdenadosPorAciertos(): List<Equipo>
++ obtenerNombresEquipos(): List<String>
++ obtenerColoresEquipos(): List<String>
++ getEquiposConJugadores(): List<Equipo>
+
+GestorJugadores
+---------------
+- jugadores: List<Jugador>
++ GestorJugadores()
++ agregarJugador(jugador: Jugador): boolean
++ removerJugador(jugador: Jugador): boolean
++ obtenerTodosLosJugadores(): List<Jugador>
++ buscarJugadorPorNombre(nombre: String): Jugador
++ getNumeroJugadores(): int
++ existeJugador(nombre: String): boolean
++ existeJugador(jugador: Jugador): boolean
++ limpiarJugadores(): void
++ obtenerJugadoresOrdenadosPorPuntuacion(): List<Jugador>
++ obtenerJugadoresOrdenadosPorAciertos(): List<Jugador>
++ obtenerNombresJugadores(): List<String>
++ getJugadoresConEstadisticas(): List<Jugador>
++ getJugadorConMayorPuntuacion(): Jugador
+
+GestorPartidas
+--------------
+- partidas: List<Partida>
++ GestorPartidas()
++ agregarPartida(partida: Partida): boolean
++ removerPartida(partida: Partida): boolean
++ obtenerTodasLasPartidas(): List<Partida>
++ obtenerPartidasEnCurso(): List<Partida>
++ obtenerPartidasTerminadas(): List<Partida>
++ obtenerPartidasEnPreparacion(): List<Partida>
++ buscarPartidaPorId(id: String): Partida
++ getNumeroPartidas(): int
++ getNumeroPartidasEnCurso(): int
++ getNumeroPartidasTerminadas(): int
++ limpiarPartidas(): void
++ obtenerPartidasOrdenadasPorFecha(): List<Partida>
++ obtenerPartidasOrdenadasPorDuracion(): List<Partida>
++ obtenerIdsPartidas(): List<String>
++ getPartidasConEstadisticas(): List<Partida>
+
+PACKAGE: co.edu.udistrital.persistence
+-------------------------------------
+
+PersistenciaManager
+-------------------
++ PersistenciaManager()
++ guardarConfiguracion(configuracion: ConfiguracionJuego): boolean
++ cargarConfiguracion(): ConfiguracionJuego
++ guardarPartida(partida: Partida): boolean
++ cargarPartida(idPartida: String): Partida
++ obtenerIdsPartidasGuardadas(): List<String>
++ eliminarPartida(idPartida: String): boolean
++ backupDatos(): boolean
++ restaurarDatos(): boolean
++ limpiarDatos(): boolean
+
+ArchivoAccesoAleatorio
+----------------------
+- TAMANO_REGISTRO_EQUIPO: int = 256
+- TAMANO_REGISTRO_JUGADOR: int = 128
+- ARCHIVO_EQUIPOS: String = "Specs/data/equipos.dat"
+- ARCHIVO_JUGADORES: String = "Specs/data/jugadores.dat"
+- SEPARADOR: String = "|"
++ ArchivoAccesoAleatorio()
++ guardarEquipo(equipo: Equipo): boolean
++ cargarEquipos(): List<Equipo>
++ guardarJugador(jugador: Jugador, nombreEquipo: String): boolean
++ cargarJugadores(): List<Jugador>
++ limpiarDatos(): boolean
++ getNumeroEquipos(): int
++ getNumeroJugadores(): int
+- crearDirectoriosNecesarios(): void
+- buscarEspacioDisponible(raf: RandomAccessFile): long
+- formatearEquipo(equipo: Equipo): String
+- parsearEquipo(registro: String): Equipo
+- formatearJugador(jugador: Jugador, nombreEquipo: String): String
+- parsearJugador(registro: String): Jugador
+
+PACKAGE: co.edu.udistrital.view
+-------------------------------
+
+VistaPrincipal extends JFrame
+-----------------------------
+- controlador: IControladorJuego
+- panelPrincipal: JPanel
+- panelEquipos: JPanel
+- panelJugadores: JPanel
+- panelPartida: JPanel
+- panelEstadisticas: JPanel
+- labelTitulo: JLabel
+- labelEstadoPartida: JLabel
+- labelRonda: JLabel
+- labelEquipoActual: JLabel
+- botonNuevaPartida: JButton
+- botonIniciarPartida: JButton
+- botonFinalizarPartida: JButton
+- botonConfiguracion: JButton
+- botonGuardarPartida: JButton
+- botonCargarPartida: JButton
+- botonAgregarEquipo: JButton
+- botonAgregarJugador: JButton
+- botonSimularIntento: JButton
+- botonGuardarDatos: JButton
+- listaEquipos: JList<Equipo>
+- listaJugadores: JList<Jugador>
+- areaEstadisticas: JTextArea
+- scrollEquipos: JScrollPane
+- scrollJugadores: JScrollPane
+- scrollEstadisticas: JScrollPane
++ VistaPrincipal(controlador: IControladorJuego)
++ actualizarVista(): void
++ mostrarMensaje(mensaje: String): void
++ mostrarError(mensaje: String): void
++ mostrarConfirmacion(mensaje: String): boolean
+- inicializarComponentes(): void
+- configurarInterfaz(): void
+- configurarEventos(): void
+- actualizarListaEquipos(): void
+- actualizarJugadoresDelEquipo(): void
+- actualizarEstadoPartida(): void
+- actualizarEstadisticas(): void
+- actualizarEstadoBotones(): void
+- mostrarDialogoConfiguracion(): void
+- mostrarDialogoCargarPartida(): void
+- mostrarDialogoAgregarEquipo(): void
+- mostrarDialogoAgregarJugador(): void
+- simularIntento(): void
+- guardarDatosCompletos(): void
+
+DialogoConfiguracion extends JDialog
+---------------------------------
+- configuracion: ConfiguracionJuego
+- configuracionAceptada: boolean
++ DialogoConfiguracion(parent: JFrame, configuracion: ConfiguracionJuego)
++ getConfiguracion(): ConfiguracionJuego
++ isConfiguracionAceptada(): boolean
+- inicializarComponentes(): void
+- configurarInterfaz(): void
+- configurarEventos(): void
+- aplicarConfiguracion(): void
+- cancelarConfiguracion(): void
+
+DialogoGestionEquipos extends JDialog
+-------------------------------------
+- controlador: IControladorJuego
+- listaEquipos: JList<Equipo>
+- listaJugadores: JList<Jugador>
+- botonAgregarEquipo: JButton
+- botonRemoverEquipo: JButton
+- botonAgregarJugador: JButton
+- botonRemoverJugador: JButton
+- botonCerrar: JButton
++ DialogoGestionEquipos(parent: JFrame, controlador: IControladorJuego)
+- inicializarComponentes(): void
+- configurarInterfaz(): void
+- configurarEventos(): void
+- actualizarListaEquipos(): void
+- actualizarListaJugadores(): void
+- mostrarDialogoAgregarEquipo(): void
+- mostrarDialogoAgregarJugador(): void
+
+PACKAGE: co.edu.udistrital.controller (Launcher)
+------------------------------------------------
+
+Launcher
+--------
++ main(args: String[]): void
+
+JuegoDeLaArgolla
+----------------
++ inicializar(): void
+
+PACKAGE: co.edu.udistrital.controller (Test)
+--------------------------------------------
+
+TestRunner
+----------
+- testsPassed: int
+- testsFailed: int
+- totalTests: int
++ main(args: String[]): void
++ runGameManagerTests(): void
++ runGestorEquiposTests(): void
++ runGestorJugadoresTests(): void
++ test(testName: String, testFunction: TestFunction): void
+- TestFunction: interface
+
+RELATIONSHIPS
+=============
+
+1. GameManager HAS-A GestorEquipos (1:1)
+2. GameManager HAS-A GestorJugadores (1:1)
+3. GameManager HAS-A GestorPartidas (1:1)
+4. GameManager HAS-A PersistenciaManager (1:1)
+5. GameManager HAS-A ArchivoAccesoAleatorio (1:1)
+6. GameManager HAS-A Partida (1:0..1)
+7. GameManager HAS-A ConfiguracionJuego (1:1)
+
+8. Equipo HAS-A List<Jugador> (1:0..*)
+9. Partida HAS-A List<Equipo> (1:0..*)
+
+10. VistaPrincipal DEPENDS-ON IControladorJuego (1:1)
+11. DialogoConfiguracion DEPENDS-ON ConfiguracionJuego (1:1)
+12. DialogoGestionEquipos DEPENDS-ON IControladorJuego (1:1)
+
+13. Launcher CREATES GameManager (1:1)
+14. Launcher CREATES VistaPrincipal (1:1)
+15. JuegoDeLaArgolla CREATES GameManager (1:1)
+16. JuegoDeLaArgolla CREATES VistaPrincipal (1:1)
+
+17. TestRunner TESTS GameManager (1:1)
+18. TestRunner TESTS GestorEquipos (1:1)
+19. TestRunner TESTS GestorJugadores (1:1)
+
+DESIGN PATTERNS IMPLEMENTED
+===========================
+
+1. MVC (Model-View-Controller)
+   - Model: Jugador, Equipo, Partida, ConfiguracionJuego
+   - View: VistaPrincipal, DialogoConfiguracion, DialogoGestionEquipos
+   - Controller: GameManager, GestorEquipos, GestorJugadores, GestorPartidas
+
+2. Dependency Injection (DIP)
+   - VistaPrincipal receives IControladorJuego through constructor
+   - GameManager receives specialized managers through constructor
+
+3. Single Responsibility Principle (SRP)
+   - Each class has a single, well-defined responsibility
+   - GestorEquipos manages only teams
+   - GestorJugadores manages only players
+   - GestorPartidas manages only matches
+
+4. Interface Segregation Principle (ISP)
+   - IControladorJuego interface defines only necessary methods
+   - No fat interfaces
+
+5. Open/Closed Principle (OCP)
+   - Classes are open for extension, closed for modification
+   - New game features can be added without modifying existing code
+
+6. Liskov Substitution Principle (LSP)
+   - All implementations of IControladorJuego are substitutable
+   - No instanceof checks, uses polymorphism
+
+ARCHITECTURE LAYERS
+==================
+
+1. Presentation Layer (View)
+   - VistaPrincipal
+   - DialogoConfiguracion
+   - DialogoGestionEquipos
+
+2. Business Logic Layer (Controller)
+   - GameManager
+   - GestorEquipos
+   - GestorJugadores
+   - GestorPartidas
+
+3. Data Access Layer (Persistence)
+   - PersistenciaManager
+   - ArchivoAccesoAleatorio
+
+4. Domain Layer (Model)
+   - Jugador
+   - Equipo
+   - Partida
+   - ConfiguracionJuego
+
+5. Test Layer
+   - TestRunner
+   - GameManagerTest
+   - GestorEquiposTest
+   - GestorJugadoresTest
