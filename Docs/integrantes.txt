@@ -1,0 +1,120 @@
+INTEGRANTES DEL PROYECTO - JUEGO DE LA ARGOLLA
+===============================================
+
+Desarrollado por: Sistema Juego de la Argolla
+Versión: 1.0
+Fecha: 2024
+
+ARQUITECTURA DEL PROYECTO
+========================
+
+Este proyecto implementa una aplicación de escritorio en Java utilizando
+el patrón de arquitectura MVC (Modelo-Vista-Controlador) y los principios
+SOLID de diseño orientado a objetos.
+
+ESTRUCTURA DE PAQUETES
+======================
+
+co.edu.udistrital.model
+-----------------------
+Contiene las clases del modelo de negocio:
+- Jugador: Representa un jugador del juego
+- Equipo: Representa un equipo de jugadores
+- Partida: Representa una partida del juego
+- ConfiguracionJuego: Configuración del juego
+
+co.edu.udistrital.view
+----------------------
+Contiene las clases de la interfaz gráfica:
+- VistaPrincipal: Ventana principal del juego
+- DialogoConfiguracion: Diálogo de configuración
+- DialogoGestionEquipos: Diálogo de gestión de equipos
+
+co.edu.udistrital.controller
+---------------------------
+Contiene las clases del controlador:
+- IControladorJuego: Interfaz del controlador (DIP)
+- GameManager: Controlador principal
+- GestorEquipos: Gestor especializado de equipos
+- GestorJugadores: Gestor especializado de jugadores
+- GestorPartidas: Gestor especializado de partidas
+
+co.edu.udistrital.persistence
+----------------------------
+Contiene las clases de persistencia:
+- PersistenciaManager: Gestor de persistencia de datos
+
+PRINCIPIOS DE DISEÑO APLICADOS
+==============================
+
+1. ARQUITECTURA MVC ESTRICTA
+   - Modelo: Lógica de negocio pura, sin dependencias Swing
+   - Vista: Solo componentes gráficos, delegación mínima al controlador
+   - Controlador: Cerebro de la aplicación, orquesta el flujo
+
+2. PRINCIPIOS SOLID
+   - SRP: Cada clase tiene una responsabilidad única
+   - OCP: Extensible sin modificar código existente
+   - LSP: Polimorfismo sin instanceof
+   - ISP: Interfaces específicas y cohesivas
+   - DIP: Inversión de dependencias con interfaces
+
+3. PATRONES DE DISEÑO
+   - MVC: Separación clara de responsabilidades
+   - DIP: Inyección de dependencias
+   - Gestores especializados: Delegación de responsabilidades
+
+CARACTERÍSTICAS TÉCNICAS
+========================
+
+- Java 8 o superior
+- Swing para interfaz gráfica
+- JUnit 5 para pruebas unitarias
+- Serialización para persistencia
+- Arquitectura modular y extensible
+- Documentación JavaDoc completa
+- Pruebas unitarias exhaustivas
+
+FUNCIONALIDADES IMPLEMENTADAS
+=============================
+
+1. Gestión de Equipos y Jugadores
+2. Configuración del Juego
+3. Simulación de Partidas
+4. Sistema de Puntuación
+5. Persistencia de Datos
+6. Estadísticas del Juego
+7. Interfaz Gráfica Intuitiva
+
+ESTRUCTURA DE ARCHIVOS
+======================
+
+src/
+├── co/edu/udistrital/
+│   ├── model/           # Clases del modelo
+│   ├── view/            # Clases de la vista
+│   ├── controller/      # Clases del controlador
+│   ├── persistence/     # Clases de persistencia
+│   └── Launcher.java    # Punto de entrada
+├── test/                # Pruebas unitarias
+├── Specs/data/          # Archivos de datos
+└── Docs/                # Documentación
+
+INSTRUCCIONES DE USO
+====================
+
+1. Compilar el proyecto
+2. Ejecutar la clase Launcher
+3. Configurar el juego si es necesario
+4. Agregar equipos y jugadores
+5. Iniciar una nueva partida
+6. Disfrutar del juego
+
+NOTAS DE DESARROLLO
+===================
+
+- Código limpio y bien documentado
+- Pruebas unitarias completas
+- Arquitectura escalable
+- Principios SOLID aplicados
+- Patrón MVC estricto
