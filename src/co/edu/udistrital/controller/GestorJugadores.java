@@ -9,7 +9,7 @@ import java.util.List;
  * Implementa el principio de responsabilidad única (SRP) al manejar
  * únicamente las operaciones relacionadas con jugadores.
  * 
- * @author Sistema Juego de la Argolla
+ * @author Sansantax
  * @version 1.0
  */
 public class GestorJugadores {

@@ -11,7 +11,7 @@ import java.util.List;
  * Esta interfaz permite la inversión de dependencias (DIP) al desacoplar
  * la vista del controlador concreto.
  * 
- * @author Sistema Juego de la Argolla
+ * @author Sansantax
  * @version 1.0
  */
 public interface IControladorJuego {

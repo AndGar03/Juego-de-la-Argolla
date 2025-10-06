@@ -12,7 +12,7 @@ import java.util.Properties;
  * Implementa el principio de responsabilidad única (SRP) al manejar
  * únicamente las operaciones de persistencia de datos.
  * 
- * @author Sistema Juego de la Argolla
+ * @author Sansantax
  * @version 1.0
  */
 public class PersistenciaManager {

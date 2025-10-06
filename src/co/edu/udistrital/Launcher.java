@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
  * los enlaza mediante inyección de dependencias y hace visible
  * la aplicación, sin contener lógica de negocio.
  * 
- * @author Sistema Juego de la Argolla
+ * @author Sansantax
  * @version 1.0
  */
 public class Launcher {

@@ -11,7 +11,7 @@ import java.util.UUID;
  * Implementa el patrón de responsabilidad única (SRP) al delegar
  * responsabilidades específicas a gestores especializados.
  * 
- * @author Sistema Juego de la Argolla
+ * @author Sansantax
  * @version 1.0
  */
 public class GameManager implements IControladorJuego {

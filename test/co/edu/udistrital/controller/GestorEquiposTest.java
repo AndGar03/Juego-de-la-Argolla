@@ -16,7 +16,7 @@ import java.util.List;
  * Pruebas unitarias para la clase GestorEquipos.
  * Utiliza JUnit 5 con las anotaciones requeridas.
  * 
- * @author Sistema Juego de la Argolla
+ * @author Sansantax
  * @version 1.0
  */
 @DisplayName("Pruebas del GestorEquipos")

@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
  * Implementa el patrón MVC al delegar la lógica de configuración
  * al controlador a través de la vista principal.
  * 
- * @author Sistema Juego de la Argolla
+ * @author Sansantax
  * @version 1.0
  */
 public class DialogoConfiguracion extends JDialog {
