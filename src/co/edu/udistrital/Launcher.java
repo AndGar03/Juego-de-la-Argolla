@@ -7,8 +7,6 @@ import co.edu.udistrital.model.ConfiguracionJuego;
 import co.edu.udistrital.persistence.PersistenciaManager;
 
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Clase principal (Launcher) del Juego de la Argolla.
@@ -46,19 +44,8 @@ public class Launcher {
      * Configura el look and feel del sistema para la aplicación.
      */
     private static void configurarLookAndFeel() {
-        try {
-            // Intentar usar el look and feel del sistema
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
-        } catch (ClassNotFoundException | InstantiationException | 
-                 IllegalAccessException | UnsupportedLookAndFeelException e) {
-            // En caso de error, usar el look and feel por defecto
-            try {
-                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeel());
-            } catch (ClassNotFoundException | InstantiationException | 
-                     IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                // Si también falla, continuar con el look and feel por defecto
-            }
-        }
+        /*    // Intentar usar el look and feel del sistema
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());*/
     }
     
     /**
