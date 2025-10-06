@@ -1,0 +1,16 @@
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\ArchivoAccesoAleatorio.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\GameManager.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\GestorEquipos.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\GestorJugadores.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\GestorPartidas.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\IControladorJuego.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\JuegoDeLaArgolla.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\Launcher.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\control\PersistenciaManager.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\modelo\ConfiguracionJuego.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\modelo\Equipo.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\modelo\Jugador.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\modelo\Partida.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\vista\DialogoConfiguracion.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\vista\DialogoGestionEquipos.java
+C:\Users\dbadmin\Documents\NetBeansProjects\Juego-de-la-Argolla\src\udistrital\avanzada\argolla\vista\VistaPrincipal.java
