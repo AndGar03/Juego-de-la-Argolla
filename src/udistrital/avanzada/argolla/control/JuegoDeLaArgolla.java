@@ -13,7 +13,7 @@ import udistrital.avanzada.argolla.vista.VistaPrincipal;
  * los enlaza mediante inyección de dependencias y hace visible
  * la aplicación, sin contener lógica de negocio.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class JuegoDeLaArgolla {

@@ -12,7 +12,7 @@ import java.util.UUID;
  * Implementa el patrón de responsabilidad única (SRP) al delegar
  * responsabilidades específicas a gestores especializados.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class GameManager implements IControladorJuego {

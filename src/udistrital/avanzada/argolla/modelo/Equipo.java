@@ -9,7 +9,7 @@ import java.util.List;
  * Un equipo está compuesto por varios jugadores y mantiene
  * estadísticas agregadas del equipo.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class Equipo implements Serializable {

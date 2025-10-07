@@ -1,7 +1,7 @@
 ANÁLISIS DE PRUEBAS - JUEGO DE LA ARGOLLA v3.0
 ==============================================
 
-Autor: Sansantax
+Autores: Sansantax, And_Gar03
 Versión: 3.0
 Fecha: 2024
 

@@ -1,8 +1,6 @@
 package udistrital.avanzada.argolla.control;
 
 import udistrital.avanzada.argolla.modelo.*;
-import udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio;
-import java.util.List;
 
 /**
  * Clase para ejecutar las pruebas unitarias sin dependencias externas.
@@ -22,7 +20,7 @@ public class TestRunner {
      */
     public static void main(String[] args) {
         System.out.println("=== INICIANDO PRUEBAS DEL JUEGO DE LA ARGOLLA ===");
-        System.out.println("Versión 3.0 - Autor: Sansantax");
+        System.out.println("Versión 3.0 - Autores: Sansantax, And_Gar03");
         System.out.println("================================================");
         
         // Ejecutar pruebas de GameManager

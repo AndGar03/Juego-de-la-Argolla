@@ -2,7 +2,7 @@
 
 ## Información General
 - **Proyecto**: Juego de la Argolla
-- **Autor**: And_Gar03
+- **Autores**: Sansantax, And_Gar03
 - **Versión**: 2.0
 - **Fecha**: Diciembre 2024
 - **Herramienta de Pruebas**: JUnit 5

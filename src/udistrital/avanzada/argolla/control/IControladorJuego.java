@@ -12,7 +12,7 @@ import java.util.List;
  * Esta interfaz permite la inversión de dependencias (DIP) al desacoplar
  * la vista del controlador concreto.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public interface IControladorJuego {

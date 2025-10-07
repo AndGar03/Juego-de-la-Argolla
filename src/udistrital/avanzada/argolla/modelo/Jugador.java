@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Esta clase contiene únicamente la lógica de negocio del jugador
  * sin dependencias de la interfaz gráfica.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class Jugador implements Serializable {
