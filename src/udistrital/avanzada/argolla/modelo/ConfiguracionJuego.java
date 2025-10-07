@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Esta clase contiene todos los parámetros configurables
  * que afectan el comportamiento del juego.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class ConfiguracionJuego implements Serializable {

@@ -9,7 +9,7 @@ import java.util.List;
  * Implementa el principio de responsabilidad única (SRP) al manejar
  * únicamente las operaciones relacionadas con equipos.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class GestorEquipos {

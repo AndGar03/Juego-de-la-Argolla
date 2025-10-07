@@ -4,7 +4,6 @@ import udistrital.avanzada.argolla.modelo.Equipo;
 import udistrital.avanzada.argolla.modelo.Jugador;
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * Implementa el principio de responsabilidad única (SRP) al manejar únicamente
  * las operaciones de archivos de acceso aleatorio.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class ArchivoAccesoAleatorio {

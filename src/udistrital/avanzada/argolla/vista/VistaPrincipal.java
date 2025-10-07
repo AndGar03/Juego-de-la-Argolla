@@ -17,7 +17,7 @@ import java.util.List;
  * Implementa estrictamente el patrón MVC al contener únicamente
  * componentes de interfaz gráfica y delegar toda la lógica al controlador.
  * 
- * @author Sansantax
+ * @author Sansantax, And_Gar03
  * @version 3.0
  */
 public class VistaPrincipal extends JFrame {
