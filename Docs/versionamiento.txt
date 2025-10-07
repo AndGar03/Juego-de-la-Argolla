@@ -1,0 +1,90 @@
+=====================================================
+INFORME DE VERSIONAMIENTO GIT
+PROYECTO: [Nombre de tu Proyecto aquí]
+TALLER DE PROGRAMACIÓN (1 SEMANA)
+=====================================================
+
+Fecha de Generación del Informe: 2025-10-07
+
+-----------------------------------------------------
+1. RESUMEN EJECUTIVO DEL TALLER
+-----------------------------------------------------
+
+| Métrica | Valor | Conclusión sobre la Fase de Taller |
+| :--- | :--- | :--- |
+| **Total de Commits** | 12 | Historial conciso y manejable, adecuado para un desarrollo intensivo de una semana. |
+| **Período de Desarrollo**| 5 días (2025-10-02 al 2025-10-06) | El proyecto se completó eficientemente dentro del plazo de la semana. |
+| **Contribución** | Equilibrada (50% cada desarrollador). | Alta colaboración entre los dos miembros del equipo. |
+| **Rama de Entrega** | Versión_Final | Se utilizó una rama específica para la entrega final del taller. |
+
+-----------------------------------------------------
+2. ANÁLISIS DE COLABORACIÓN Y PRODUCTIVIDAD
+-----------------------------------------------------
+
+### A. Aportes de los Desarrolladores
+
+La colaboración fue ejemplar, con una división equitativa del trabajo reflejada en el historial:
+
+| Autor | Commits | Porcentaje |
+| :--- | :--- | :--- |
+| **SanSantax** (incluye D. Santamaria) | 6 | 50% |
+| **And_Gar03** (incluye AndGar03) | 6 | 50% |
+
+### B. Frecuencia y Concentración del Trabajo
+
+El equipo demostró flexibilidad al concentrar la actividad en los momentos más efectivos:
+
+| Día de la Semana | Commits |
+| :--- | :--- |
+| **Domingo (Sun)** | 6 |
+| **Lunes (Mon)** | 3 |
+| **Jueves (Thu)** | 2 |
+| **Otros días** | 1 |
+
+**Observación:** La mayoría de los *commits* se realizaron durante el fin de semana, lo cual es común en talleres. Esto indica que el equipo logró hitos importantes fuera de los horarios tradicionales de trabajo.
+
+### C. Calidad de los Mensajes de Commit
+
+Los mensajes cumplen el propósito de describir los cambios, lo cual es suficiente para un taller, pero se puede mejorar la **trazabilidad**:
+
+* **Mensajes Funcionales:** Los *commits* como "Andres: integración final y resolución de conflictos..." o "avance mvc" proporcionan buen contexto del trabajo.
+* **Mensajes de Cierre:** Los *commits* "Versión Final" y "Correcciones de todo" son apropiados para hitos de integración o la entrega.
+
+**Recomendación de Mejora:** Para una mejor documentación futura, se sugiere estandarizar el formato de los mensajes de *commit* (ej. "FEAT: Nueva funcionalidad X", "FIX: Error Y").
+
+-----------------------------------------------------
+3. ANÁLISIS DE FLUJO DE TRABAJO Y RAMAS
+-----------------------------------------------------
+
+### A. Modelo de Ramificación
+
+El equipo utilizó un flujo de trabajo basado en **Ramas de Tarea/Personales**, adecuado para un proyecto pequeño y con tiempo limitado:
+
+* **Ramas de Trabajo:** `Andres` y `daniel`.
+* **Ramas de Entrega:** `Versión_Final` (Actualmente seleccionada).
+* **Ramas No Utilizadas:** `main` y `development` se mantienen en el *commit* inicial, indicando que el equipo optó por usar `Versión_Final` como rama principal de integración.
+
+### B. Estado de Sincronización (Higiene)
+
+Se observan cambios locales no compartidos, lo cual debe corregirse inmediatamente para evitar pérdida de trabajo y facilitar la revisión:
+
+* **Rama `Andres`:** Tiene **4 commits locales pendientes** (`[ahead 4]`) que no han sido subidos a `origin/Andres`.
+* **Rama `daniel`:** Tiene **2 commits locales pendientes** (`[ahead 2]`) que no han sido subidos a `origin/daniel`.
+
+**Acción Requerida:** Antes de terminar el taller, los desarrolladores deben ejecutar **`git push`** en sus respectivas ramas para garantizar que todo el trabajo local esté respaldado en el repositorio remoto.
+
+### C. Estructura Gráfica del Desarrollo
+
+El historial muestra una convergencia clara hacia la rama de entrega:
+
+809f986 (Andres) correciones <-- Trabajo local pendiente de push
+| * a2c1bbd (Versión_Final) Versión Final <-- Punto de Entrega
+|/
+
+9743d1f Correcciones de todo
+
+97a4691 arreglo errores y test
+... (Ramificaciones y fusiones anteriores
+**Conclusión:** El historial es lineal y fácil de seguir, lo que demuestra que los desarrolladores lograron integrar su código de manera efectiva.
+
+
