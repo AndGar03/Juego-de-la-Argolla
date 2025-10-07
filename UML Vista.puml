@@ -1,0 +1,109 @@
+@startuml
+annotation java.lang.Override
+class java.awt.event.ActionEvent
+class java.awt.event.ActionListener
+class java.nio.file.Files
+class java.nio.file.Path
+class java.nio.file.Paths
+class java.time.LocalDateTime
+class java.util.ArrayList
+class java.util.List
+class java.util.Properties
+class java.util.UUID
+class javax.swing.SwingUtilities
+class udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio
+class udistrital.avanzada.argolla.control.GameManager
+class udistrital.avanzada.argolla.control.GestorEquipos
+class udistrital.avanzada.argolla.control.GestorJugadores
+class udistrital.avanzada.argolla.control.GestorPartidas
+class udistrital.avanzada.argolla.control.JuegoDeLaArgolla
+class udistrital.avanzada.argolla.control.Launcher
+class udistrital.avanzada.argolla.control.PersistenciaManager
+class udistrital.avanzada.argolla.modelo.ConfiguracionJuego
+class udistrital.avanzada.argolla.modelo.Equipo
+class udistrital.avanzada.argolla.modelo.Jugador
+class udistrital.avanzada.argolla.modelo.Partida
+class udistrital.avanzada.argolla.vista.DialogoConfiguracion
+class udistrital.avanzada.argolla.vista.DialogoGestionEquipos
+class udistrital.avanzada.argolla.vista.JDialog
+class udistrital.avanzada.argolla.vista.JFrame
+class udistrital.avanzada.argolla.vista.VistaPrincipal
+interface java.io.Serializable
+interface udistrital.avanzada.argolla.control.IControladorJuego
+udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio ..> java.nio.file.Files
+udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio ..> java.nio.file.Path
+udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio ..> java.nio.file.Paths
+udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio ..> java.util.ArrayList
+udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio ..> java.util.List
+udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio ..> udistrital.avanzada.argolla.modelo.Equipo
+udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio ..> udistrital.avanzada.argolla.modelo.Jugador
+udistrital.avanzada.argolla.control.GameManager ..> java.lang.Override
+udistrital.avanzada.argolla.control.GameManager ..> java.util.ArrayList
+udistrital.avanzada.argolla.control.GameManager ..> java.util.List
+udistrital.avanzada.argolla.control.GameManager ..> java.util.UUID
+udistrital.avanzada.argolla.control.GameManager ..> udistrital.avanzada.argolla.control.ArchivoAccesoAleatorio
+udistrital.avanzada.argolla.control.GameManager ..> udistrital.avanzada.argolla.control.PersistenciaManager
+udistrital.avanzada.argolla.control.GameManager --|> udistrital.avanzada.argolla.control.IControladorJuego
+udistrital.avanzada.argolla.control.GestorEquipos ..> java.util.ArrayList
+udistrital.avanzada.argolla.control.GestorEquipos ..> java.util.List
+udistrital.avanzada.argolla.control.GestorEquipos ..> udistrital.avanzada.argolla.modelo.Equipo
+udistrital.avanzada.argolla.control.GestorJugadores ..> java.util.ArrayList
+udistrital.avanzada.argolla.control.GestorJugadores ..> java.util.List
+udistrital.avanzada.argolla.control.GestorJugadores ..> udistrital.avanzada.argolla.modelo.Jugador
+udistrital.avanzada.argolla.control.GestorPartidas ..> java.util.ArrayList
+udistrital.avanzada.argolla.control.GestorPartidas ..> java.util.List
+udistrital.avanzada.argolla.control.GestorPartidas ..> udistrital.avanzada.argolla.modelo.Partida
+udistrital.avanzada.argolla.control.JuegoDeLaArgolla ..> udistrital.avanzada.argolla.control.PersistenciaManager
+udistrital.avanzada.argolla.control.JuegoDeLaArgolla ..> udistrital.avanzada.argolla.modelo.ConfiguracionJuego
+udistrital.avanzada.argolla.control.JuegoDeLaArgolla ..> udistrital.avanzada.argolla.vista.VistaPrincipal
+udistrital.avanzada.argolla.control.Launcher ..> java.lang.Override
+udistrital.avanzada.argolla.control.Launcher ..> javax.swing.SwingUtilities
+udistrital.avanzada.argolla.control.Launcher ..> udistrital.avanzada.argolla.control.PersistenciaManager
+udistrital.avanzada.argolla.control.Launcher ..> udistrital.avanzada.argolla.modelo.ConfiguracionJuego
+udistrital.avanzada.argolla.control.Launcher ..> udistrital.avanzada.argolla.vista.VistaPrincipal
+udistrital.avanzada.argolla.control.PersistenciaManager ..> java.nio.file.Files
+udistrital.avanzada.argolla.control.PersistenciaManager ..> java.nio.file.Path
+udistrital.avanzada.argolla.control.PersistenciaManager ..> java.nio.file.Paths
+udistrital.avanzada.argolla.control.PersistenciaManager ..> java.util.Properties
+udistrital.avanzada.argolla.modelo.ConfiguracionJuego ..> java.lang.Override
+udistrital.avanzada.argolla.modelo.ConfiguracionJuego --|> java.io.Serializable
+udistrital.avanzada.argolla.modelo.Equipo ..> java.lang.Override
+udistrital.avanzada.argolla.modelo.Equipo ..> java.util.ArrayList
+udistrital.avanzada.argolla.modelo.Equipo ..> java.util.List
+udistrital.avanzada.argolla.modelo.Equipo --|> java.io.Serializable
+udistrital.avanzada.argolla.modelo.Jugador ..> java.lang.Override
+udistrital.avanzada.argolla.modelo.Jugador --|> java.io.Serializable
+udistrital.avanzada.argolla.modelo.Partida ..> java.lang.Override
+udistrital.avanzada.argolla.modelo.Partida ..> java.time.LocalDateTime
+udistrital.avanzada.argolla.modelo.Partida ..> java.util.ArrayList
+udistrital.avanzada.argolla.modelo.Partida ..> java.util.List
+udistrital.avanzada.argolla.modelo.Partida --|> java.io.Serializable
+udistrital.avanzada.argolla.vista.DialogoConfiguracion ..> java.lang.Override
+udistrital.avanzada.argolla.vista.DialogoConfiguracion ..> java.awt.event.ActionEvent
+udistrital.avanzada.argolla.vista.DialogoConfiguracion ..> java.awt.event.ActionListener
+udistrital.avanzada.argolla.vista.DialogoConfiguracion ..> udistrital.avanzada.argolla.modelo.ConfiguracionJuego
+udistrital.avanzada.argolla.vista.DialogoConfiguracion --|> udistrital.avanzada.argolla.vista.JDialog
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos ..> java.lang.Override
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos ..> java.awt.event.ActionEvent
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos ..> java.awt.event.ActionListener
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos ..> java.util.List
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos ..> udistrital.avanzada.argolla.modelo.Equipo
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos ..> udistrital.avanzada.argolla.modelo.Jugador
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos --|> udistrital.avanzada.argolla.vista.JDialog
+udistrital.avanzada.argolla.vista.DialogoGestionEquipos ..> udistrital.avanzada.argolla.control.IControladorJuego
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> java.lang.Override
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> java.awt.event.ActionEvent
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> java.awt.event.ActionListener
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> java.util.List
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> udistrital.avanzada.argolla.control.GameManager
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> udistrital.avanzada.argolla.modelo.Equipo
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> udistrital.avanzada.argolla.modelo.Jugador
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> udistrital.avanzada.argolla.modelo.Partida
+udistrital.avanzada.argolla.vista.VistaPrincipal --|> udistrital.avanzada.argolla.vista.JFrame
+udistrital.avanzada.argolla.vista.VistaPrincipal ..> udistrital.avanzada.argolla.control.IControladorJuego
+udistrital.avanzada.argolla.control.IControladorJuego ..> java.util.List
+udistrital.avanzada.argolla.control.IControladorJuego ..> udistrital.avanzada.argolla.modelo.ConfiguracionJuego
+udistrital.avanzada.argolla.control.IControladorJuego ..> udistrital.avanzada.argolla.modelo.Equipo
+udistrital.avanzada.argolla.control.IControladorJuego ..> udistrital.avanzada.argolla.modelo.Jugador
+udistrital.avanzada.argolla.control.IControladorJuego ..> udistrital.avanzada.argolla.modelo.Partida
+@enduml

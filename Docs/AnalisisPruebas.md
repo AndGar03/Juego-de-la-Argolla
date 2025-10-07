@@ -249,3 +249,4 @@ Las pruebas implementadas proporcionan una cobertura comprehensiva de las funcio
 - 🔄 Validación de persistencia
 
 El conjunto de pruebas establece una base sólida para el desarrollo futuro y garantiza la calidad del código del Juego de la Argolla.
+

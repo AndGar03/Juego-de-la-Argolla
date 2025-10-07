@@ -248,3 +248,4 @@ OCP: Extensible sin modificar código existente
 LSP: Polimorfismo sin instanceof
 ISP: Interfaces específicas y cohesivas
 DIP: Dependencias sobre abstracciones
+
